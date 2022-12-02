@@ -10,8 +10,30 @@ const useWordle = (solution) => {
   // format a guess into an array of letter objects 
   // e.g. [{key: 'a', color: 'yellow'}]
   const formatGuess = () => {
-    console.log('formatting the guess - ', currentGuess)
+    let solutionArray = [...solution]
+    let formattedGuess = [...currentGuess].map((l) => {
+      return {key: l, color: 'grey'}
+    })
+
+    // find any green letters
+    formattedGuess.forEach((l, i) => {
+      if (solution[i] === l.key) {
+        formattedGuess[i].color = 'green'
+        solutionArray[i] = null
+      }
+    })
+    
+    // find any yellow letters
+    formattedGuess.forEach((l, i) => {
+      if (solutionArray.includes(l.key) && l.color !== 'green') {
+        formattedGuess[i].color = 'yellow'
+        solutionArray[solutionArray.indexOf(l.key)] = null
+      }
+    })
+
+    return formattedGuess
   }
+
 
   // add a new guess to the guesses state
   // update the isCorrect state if the guess is correct
@@ -39,7 +61,8 @@ const useWordle = (solution) => {
         console.log('word must be 5 chars long')
         return
       }
-      formatGuess()
+      const formatted = formatGuess()
+      console.log(formatted)
     }
 
     if (key === 'Backspace') {
