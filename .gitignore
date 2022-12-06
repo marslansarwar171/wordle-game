@@ -3,7 +3,7 @@
 # virtual environment
 /backend/virtual-env/
 
-/backend/__pycache__/
+/backend/server/__pycache__/
 
 /backend/.env
 
