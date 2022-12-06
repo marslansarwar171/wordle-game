@@ -3,6 +3,7 @@ import Wordle from './components/Wordle'
 
 function App() {
   const [solution, setSolution] = useState(null)
+  const tempWord = ["ninja", "plate", "plain", "pours", "pools", "spade", "drive", "relax", "times", "train", "cores", "blame", "banks", "phone", "bling", "hello", "coins", "apple"]
   
   useEffect(() => {
     fetch('http://localhost:8000/wordle-list/')
@@ -11,7 +12,7 @@ function App() {
         const randomSolution = json[Math.floor(Math.random()*json.length)]
         setSolution(randomSolution.word)
       })
-      .catch(err => setSolution("plain"))
+      .catch(err => setSolution(tempWord[Math.floor(Math.random()*tempWord.length)]))
   }, [setSolution])
 
   return (
