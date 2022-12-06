@@ -50,6 +50,12 @@ class WordleModel(BaseModel):
             }
         }
 
+@app.get("/", tags=["Root"])
+async def read_root():
+  return { 
+    "message": "Welcome to Wordle, use /wordle-list route to proceed"
+}
+
 
 @app.post("/add-wordle/", response_description="Add new wordle", response_model=WordleModel)
 async def create_wordle(wordle: WordleModel = Body(...)):
@@ -65,6 +71,7 @@ async def create_wordle(wordle: WordleModel = Body(...)):
 async def list_wordles():
     wordles = await db["wordles"].find().to_list(1000)
     return wordles
+
 
 if __name__ == "__main__":
   uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
