@@ -22,6 +22,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET","POST"],
+    allow_headers=["*"]
 )
 
 load_dotenv(find_dotenv())
@@ -65,9 +66,7 @@ async def create_wordle(wordle: WordleModel = Body(...)):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_wordle)
 
 
-@app.get(
-    "/wordle-list/", response_description="List all wordles", response_model=List[WordleModel]
-)
+@app.get("/wordle-list/", response_description="List all wordles", response_model=List[WordleModel])
 async def list_wordles():
     wordles = await db["wordles"].find().to_list(1000)
     return wordles
