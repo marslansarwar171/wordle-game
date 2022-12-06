@@ -19,4 +19,4 @@ export MONGODB_URI="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=t
 uvicorn app:app --reload
 ```
 
-Now you can load http://localhost:8000/docs in your browser ... but there won't be much to see until you've inserted some data.
+Now you can load http://0.0.0.0:8000/docs in your browser ... but there won't be much to see until you've inserted some data.
