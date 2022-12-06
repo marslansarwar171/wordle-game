@@ -11,18 +11,7 @@ import motor.motor_asyncio
 import uvicorn
 
 app = FastAPI()
-origins = [
-    "https://wordle-game-steel.vercel.app/",
-    "http://localhost:3000/",
-    "http://localhost"
-]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 load_dotenv(find_dotenv())
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URI"])
 db = client["wordle-db"]
