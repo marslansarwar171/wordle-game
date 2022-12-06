@@ -50,13 +50,6 @@ class WordleModel(BaseModel):
             }
         }
 
-@app.get("/", tags=["Root"])
-async def read_root():
-  return { 
-    "message": "Welcome to Wordle, use /wordle-list route to proceed"
-}
-
-
 @app.post("/add-wordle/", response_description="Add new wordle", response_model=WordleModel)
 async def create_wordle(wordle: WordleModel = Body(...)):
     wordle = jsonable_encoder(wordle)
