@@ -9,8 +9,9 @@ function App() {
       .then(res => res.json())
       .then(json => {
         const randomSolution = json[Math.floor(Math.random()*json.length)]
-        setSolution("plain")
-    })
+        setSolution(randomSolution.word)
+      })
+      .catch(err => setSolution("plain"))
   }, [setSolution])
 
   return (
