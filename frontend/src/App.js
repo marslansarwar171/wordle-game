@@ -6,7 +6,7 @@ function App() {
   const tempWord = ["ninja", "plate", "plain", "pours", "pools", "spade", "drive", "relax", "times", "train", "cores", "blame", "banks", "phone", "bling", "hello", "coins", "apple"]
   
   useEffect(() => {
-    fetch('http://localhost:8000/wordle-list/')
+    fetch('https://wordle-game-api.vercel.app/wordle-list/')
       .then(res => res.json())
       .then(json => {
         const randomSolution = json[Math.floor(Math.random()*json.length)]
