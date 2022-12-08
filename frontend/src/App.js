@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     fetch('https://wordle-game-api.vercel.app/wordle-list/',{
       method: 'GET',
-      mode: 'cors',
+      mode: 'no-cors',
       headers: {
       'Content-Type': 'application/json'
     }})

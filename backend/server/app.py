@@ -12,6 +12,8 @@ import uvicorn
 
 app = FastAPI()
 
+
+"""
 origins = [
     "https://wordle-game-steel.vercel.app",
     "http://localhost",
@@ -24,6 +26,8 @@ app.add_middleware(
     allow_methods=["GET","POST"],
     allow_headers=["*"]
 )
+"""
+
 
 load_dotenv(find_dotenv())
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URI"])
