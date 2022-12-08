@@ -6,13 +6,14 @@ from pydantic import BaseModel, Field, EmailStr
 from dotenv import load_dotenv, find_dotenv
 from bson import ObjectId
 from typing import List
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
 import uvicorn
+import asyncio
 
 app = FastAPI()
-
 load_dotenv(find_dotenv())
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URI"])
+client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
+client.get_io_loop = asyncio.get_event_loop
 db = client["wordle-db"]
 
 class PyObjectId(ObjectId):
