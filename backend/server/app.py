@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI, Body, status
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import Response, JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field, EmailStr
@@ -59,4 +60,4 @@ async def list_wordles():
 
 
 if __name__ == "__main__":
-  uvicorn.run("app:app", host="0.0.0.0", port=8000, workers=4)
+  uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
