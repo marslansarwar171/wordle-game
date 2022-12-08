@@ -10,13 +10,20 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import uvicorn
 
 load_dotenv(find_dotenv())
-client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
-db = client["wordle-db"]
+client: AsyncIOMotorClient = None
+db = None
 
-async def close_db():
+def connect_db():
+    global client
+    global db
+    client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
+    db = client["wordle-db"]
+
+def close_db():
     client.close()
 
 app = FastAPI()
+app.add_event_handler("startup", connect_db)
 app.add_event_handler("shutdown", close_db)
 
 class PyObjectId(ObjectId):
@@ -63,4 +70,4 @@ async def list_wordles():
 
 
 if __name__ == "__main__":
-  uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+  uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=true)
