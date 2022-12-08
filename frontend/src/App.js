@@ -6,7 +6,10 @@ function App() {
   const tempWord = ["ninja", "plate", "plain", "pours", "pools", "spade", "drive", "relax", "times", "train", "cores", "blame", "banks", "phone", "bling", "hello", "coins", "apple"]
   
   useEffect(() => {
-    fetch('https://wordle-game-api.vercel.app/wordle-list/',{ headers: {
+    fetch('https://wordle-game-api.vercel.app/wordle-list/',{
+      method: 'GET',
+      mode: 'cors',
+      headers: {
       'Content-Type': 'application/json'
     }})
       .then(res => res.json())
