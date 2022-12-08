@@ -11,19 +11,9 @@ import uvicorn
 
 app = FastAPI()
 load_dotenv(find_dotenv())
-client: AsyncIOMotorClient = None
-db = None
+client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
+db = client["wordle-db"]
 
-@app.on_event("startup")
-async def startup_event():
-    global client
-    global db
-    client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
-    db = client["wordle-db"]
-
-@app.on_event("shutdown")
-def shutdown_event():
-    client.close()
 
 class PyObjectId(ObjectId):
     @classmethod
