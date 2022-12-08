@@ -149,9 +149,11 @@ h1 {
   box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 .modal .solution {
-  color: #ff004c;
+  border: 1px solid MediumSeaGreen;
+  color: #fff;
+  background-color: MediumSeaGreen;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 2.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
 }

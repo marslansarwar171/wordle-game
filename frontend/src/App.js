@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import Wordle from './components/Wordle'
+import WORD_LIST from './constants/words'
+
+
 
 function App() {
   const [solution, setSolution] = useState(null)
-  const tempWord = ["ninja", "plate", "plain", "pours", "pools", "spade", "drive", "relax", "times", "train", "cores", "blame", "banks", "phone", "bling", "hello", "coins", "apple"]
   
   useEffect(() => {
     fetch('https://wordle-game-api.vercel.app/wordle-list/',{
@@ -17,7 +19,7 @@ function App() {
         const randomSolution = json[Math.floor(Math.random()*json.length)]
         setSolution(randomSolution.word)
       })
-      .catch(err => setSolution(tempWord[Math.floor(Math.random()*tempWord.length)]))
+      .catch(err => setSolution(WORD_LIST[Math.floor(Math.random()*WORD_LIST.length)]))
   }, [setSolution])
 
   return (
