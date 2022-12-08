@@ -2,7 +2,6 @@ import os
 from fastapi import FastAPI, Body, status
 from fastapi.responses import Response, JSONResponse
 from fastapi.encoders import jsonable_encoder
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, EmailStr
 from dotenv import load_dotenv, find_dotenv
 from bson import ObjectId
@@ -11,23 +10,6 @@ import motor.motor_asyncio
 import uvicorn
 
 app = FastAPI()
-
-
-"""
-origins = [
-    "https://wordle-game-steel.vercel.app",
-    "http://localhost",
-    "http://localhost:3000",
-]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["GET","POST"],
-    allow_headers=["*"]
-)
-"""
-
 
 load_dotenv(find_dotenv())
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URI"])
