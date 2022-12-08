@@ -8,23 +8,15 @@ from bson import ObjectId
 from typing import List
 from motor.motor_asyncio import AsyncIOMotorClient
 import uvicorn
-import asyncio
 
 load_dotenv(find_dotenv())
-client: AsyncIOMotorClient = None
-db = None
-
-async def connect_db():
-    global client
-    global db
-    client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
-    db = client["wordle-db"]
+client = AsyncIOMotorClient(os.environ["MONGODB_URI"])
+db = client["wordle-db"]
 
 async def close_db():
     client.close()
 
 app = FastAPI()
-app.add_event_handler("startup", connect_db)
 app.add_event_handler("shutdown", close_db)
 
 class PyObjectId(ObjectId):
